@@ -1,0 +1,36 @@
+.mychat{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.mychat-section{
+    height: 56vh;
+    width: 80%;
+    overflow-y: scroll;
+    scrollbar-width: none;
+}
+.user-data{
+    background-color: #2f2f2f;
+    margin: 10px;
+    width: fit-content;
+    float: right;
+    border-radius: 20px 20px 0px 20px;
+    padding: 12px;
+    color: white;
+}
+.chatgpt-data {
+    float: left;
+    width: fit-content;
+    border-radius: 20px 20px 20px 0px;
+    margin: 10px;
+    color: white;
+    margin: 0 auto; /* Gives that scrolling effect as the typing happens */
+  letter-spacing: .15em; /* Adjust as needed */
+  animation: 
+    typing 3.5s steps(10, end),
+    blink-caret .75s step-end infinite;
+}
+.inputs{
+    background-color: white;
+    border-radius: 20px;
+}
