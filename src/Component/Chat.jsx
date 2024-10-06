@@ -15,7 +15,7 @@ function Chat({ message, loading}) {
           return <> <div className={ele.role=="user"?"user-data":"chatgpt-data"}>{ele?.content && parse(marked(ele.content))}</div> <br/>
           </>
         })}
-        {loading &&  <span class="loading loading-ring loading-md flex items-center justify-center"></span>}
+        {loading &&  <div class="flex items-center justify-start w-full"><span class="loading loading-dots loading-lg "></span></div>}
        
 
       </div>

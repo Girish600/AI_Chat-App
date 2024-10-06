@@ -55,8 +55,10 @@ const handleLogout = () => {
         confirmButtonText: "ok",
       });
 
-      setLoading(true);
     message.push({ role: "user", content: input });
+    setLoading(true);
+    setinput("");
+
     const completion = await openai.chat.completions.create({
       model: "gpt-4o-mini",
       messages: message,
@@ -72,21 +74,21 @@ const handleLogout = () => {
     console.log(completion.choices[0].message);
     setMessage([...message]);
     setLoading(false)
-    setinput("");
+    
   };
 
   return (
     <>
-      <main>
+      <main className="bg-[#212121] w-[100%]">
         <nav>
           <div className="p-3 flex justify-between">
-            <div class="flex-1 text-xl ml-5 text-white">
-              <img src="/Image/ChatWave.png" alt="Img" class="w-10 p-1" />
+            <div class="flex-1 text-xl ml-5 text-white flex flex-row items-center">
+              <img src="/Image/ChatWave.png" alt="Img" class="w-10 p-1 rounded-[50%]" />
               <a href="#">ChatWave</a>
             </div>
             {user ? (
             <div className="sign-btn flex justify-center items-center ml-2 px-4 h-auto w-auto py-1 bg-[#171717] text-sm font-bold text-white rounded-3xl">
-              <img src={user.photoURL} className="rounded-full w-10 h-10 mr-2" alt="User Profile" loading="lazy"/>
+              {user?.photoURL && <img src={user?.photoURL} className="rounded-full w-10 h-10 mr-2" crossOrigin="anonymous" alt="User Profile" loading="lazy"/>}
               <button onClick={handleLogout}>Logout</button>
             </div>
           ) : (
@@ -98,36 +100,36 @@ const handleLogout = () => {
           )}
           </div>
         </nav>
-        <section className="logo flex flex-row justify-center w-full">
+        <section className="logo items-center flex flex-row justify-center w-full">
           <div className="logo-img w-20 p-3">
-            <img src="/Image/ChatWave.png" />
+            <img src="/Image/ChatWave.png" className=" rounded-[50%]"/>
           </div>
           <div className="logo-name text-xl text-white">ChatWave</div>
         </section>
-        <section className="Main-Contain">
-          <div class="flex chat-contain justify-center">
+        <section className="Main-Contain w-full flex flex-col items-center justify-center">
+          <div class="flex chat-contain w-[800px] px-5 m-2 bg-[#2f2f2f] rounded-3xl justify-center">
             <div class="w-full">
-           
-
               <div className="gpt-container">
                 <Chat message={message} loading={loading} />
               </div>
-              <div className="input-section flex justify-center my-5">
-                <MdAddLink className="add-img" size={26} color="white" />
+              <div className="input-section rounded- items-center w-full bg-[#2f2f2f] flex justify-center my-5">
+                <MdAddLink className="add-img ml-5 border-none outline-none bg-[#2f2f2f] rounded-[50%] cursor-pointer" size={26} color="white" />
                 <input
                   type="text"
                   value={input}
                   placeholder="enter your prompt"
+                  className="flex text-white py-4 px-5 rounded-e-badge w-[600px] bg-[#2f2f2f] text-base outline-none border-none"
                   onChange={(e) => setinput(e.target.value)}
                 />
                 <FaArrowUp
-                  className="enter-input"
+                  className="enter-input border-none outline-none w-[34px] h-[auto] mr-2 text-[#212121] p-2 bg-[#676767] cursor-pointer rounded-[50%]"
                   onClick={chatOpenAi}
                   color="white"
                 />
               </div>
             </div>
           </div>
+          <div>ChatWave can make mistakes. Check important info.</div>
         </section>
       </main>
     </>

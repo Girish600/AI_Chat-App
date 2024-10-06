@@ -4,6 +4,7 @@ import Login from './Component/Login/Login';
 import Home from './Component/Home/Home';
 import { signInWithPopup, signOut } from "firebase/auth";
 import { auth, provider } from "./Component/FirebaseConfig";
+import { GithubAuthProvider } from "firebase/auth/web-extension";
 
 function App() {
 
@@ -16,16 +17,24 @@ function App() {
     }
   };
 
-  const logout = async () => {
-    try {
-      await signOut(auth);
-      setUser(null);
-    } catch (error) {
-      console.error("Error signing out", error);
-    }
-  };
-
-
+  const provider = new GithubAuthProvider();
+    const signInWithGithub = async () => {
+        try {
+            signInWithPopup(auth, provider)
+                .then((result) => {
+                    const credential = GithubAuthProvider.credentialFromResult(result);
+                    const token = credential.accessToken;
+                    const user = result.user;
+                }).catch((error) => {
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    const email = error.customData.email;
+                    const credential = GithubAuthProvider.credentialFromError(error);
+                });
+        } catch (error) {
+            console.error("Error signing in with Google", error);
+        }
+    };
 
   return (
     <>
