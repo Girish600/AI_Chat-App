@@ -1,16 +1,16 @@
 @media all and (max-width:550px) {
     .Main-Contain .chat-contain{
         width: 400px;
-        height: 500px;
+        height: auto;
     }
     .input-section{
         position: sticky;
-        bottom: 0;
+        bottom: 10px;
         left: 0;
         right: 0;
     }
     .input-section .add-img{
-        margin-left: 10px;
+        margin-left: 5px;
     }
     .input-section .enter-input{
         margin-right: 10px;
@@ -19,7 +19,7 @@
         width: 400px;
     }
     .mychat-section{
-        height: 480px;
+        height: auto;
     }
     .chatgpt-data{
         letter-spacing: .1em;
