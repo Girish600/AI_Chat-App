@@ -1,10 +1,10 @@
-@media all and (min-width:450px) {
+@media (min-width: 350px) and (max-width:500px) {
     main{
         background-color: #212121;
         height: 100vh;
     }
     .Main-Contain .chat-contain{
-        width: 400px;
+        width: 350px;
         bottom: 0;
         margin: 10px;
     }
