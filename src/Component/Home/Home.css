@@ -1,4 +1,7 @@
 @media all and (max-width:550px) {
+    main{
+        background-color: #212121;
+    }
     .Main-Contain .chat-contain{
         width: 400px;
         bottom: 0;
