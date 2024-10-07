@@ -9,6 +9,12 @@
         left: 0;
         right: 0;
     }
+    .input-section .add-img{
+        margin-left: 10px;
+    }
+    .input-section .enter-input{
+        margin-right: 10px;
+    }
     .input-section input{
         width: 400px;
     }
@@ -22,5 +28,11 @@
 @media (min-width: 520px) and (max-width: 800px) {
     .Main-Contain .chat-contain{
         width: 500px;
+    }
+    .input-section .add-img{
+        margin-left: 15px;
+    }
+    .input-section .enter-input{
+        margin-right: 15px;
     }
 }
