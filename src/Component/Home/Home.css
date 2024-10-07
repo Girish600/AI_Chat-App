@@ -17,6 +17,7 @@
     }
     .input-section input{
         width: 400px;
+        background: transparent;
     }
     .mychat-section{
         height: auto;
