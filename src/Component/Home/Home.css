@@ -6,7 +6,6 @@
     .Main-Contain .chat-contain{
         width: 350px;
         bottom: 0;
-        margin: 10px;
     }
     .input-section{
         position: sticky;
@@ -16,12 +15,15 @@
     }
     .input-section .add-img{
         margin-left: 10px;
+        padding: 0;
     }
     .input-section .enter-input{
         margin-right: 10px;
+        padding: 0;
     }
     .input-section input{
-        width: 400px;
+        width: auto;
+        object-fit: contain;
         background: transparent;
     }
     .mychat-section{
