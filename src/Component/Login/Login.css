@@ -4,3 +4,10 @@ span{
 img{
     background: none;
 }
+
+@media (min-width: 350px) and (max-width:500px) {
+    .login{
+        height: 100vh;
+        background-color: #fff;
+    }
+}
