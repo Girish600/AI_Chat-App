@@ -1,4 +1,4 @@
-@media all and (max-width:550px) {
+@media all and (min-width:450px) {
     main{
         background-color: #212121;
         height: 100vh;
