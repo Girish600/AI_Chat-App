@@ -1,7 +1,8 @@
 @media all and (max-width:550px) {
     .Main-Contain .chat-contain{
         width: 400px;
-        height: auto;
+        bottom: 0;
+        margin: 10px;
     }
     .input-section{
         position: sticky;
