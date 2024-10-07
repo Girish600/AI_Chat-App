@@ -1,9 +1,8 @@
 import React from 'react'
 import './Login.css';
 import { auth, provider } from '../FirebaseConfig';
-import { signInWithPopup, signOut } from "firebase/auth";
 import { useState } from 'react'
-import { GithubAuthProvider } from 'firebase/auth/web-extension';
+import { signInWithPopup, GithubAuthProvider } from 'firebase/auth';
 
 function Login() {
     const [user, setUser] = useState(null);
@@ -19,6 +18,7 @@ function Login() {
     };
     const signInWithGithub = async () => {
         try {
+          
             const githubProvider = new GithubAuthProvider(); 
             const result = await signInWithPopup(auth, githubProvider); 
             const credential = GithubAuthProvider.credentialFromResult(result);
@@ -28,7 +28,7 @@ function Login() {
             setUser(user);
             window.location.assign("/");
         } catch (error) {
-            console.error("Error signing in with GitHub", error);
+            console.error("Error signing in with GitHub", error.message);
         }
     };
     return (
@@ -54,15 +54,15 @@ function Login() {
             </div>
             <div className='lower flex flex-col w-full items-center bg-white pt-[25px]'>
                 <div className='bg-white flex gap-3 justify-center pt-[12px] pl-[10px] border-2 border-custom-green w-[330px]  h-[50px] cursor-pointer'>
-                    <div className='bg-white'><img src='./public/Image/google.svg' className='object-fit:contain w-[20px] h-[20px]'></img></div>
+                    <div className='bg-white'><img src='./Image/google.svg' className='object-fit:contain w-[20px] h-[20px]'></img></div>
                     <div className='bg-white'><p onClick={signInWithGoogle}>Continue with Google</p></div>
                 </div>
                 <div className='bg-white flex gap-3 pl-[10px] justify-center pt-[12px] mt-[25px] border-2 border-custom-green w-[330px] h-[50px] cursor-pointer'>
-                    <div className='bg-white'><img src='./public/Image/download.png' className='object-fit:contain w-[20px] h-[20px]'></img></div>
+                    <div className='bg-white'><img src='./Image/download.png' className='object-fit:contain w-[20px] h-[20px]'></img></div>
                     <div className='bg-white'><p onClick={signInWithGithub}>Continue with GitHub Account</p></div>
                 </div>
                 <div className='bg-white flex gap-3 pl-[10px] justify-center pt-[12px] mt-[25px] border-2 border-custom-green w-[330px] h-[50px] cursor-pointer'>
-                    <div className='bg-white'><img src='./public/Image/apple.svg' className='object-fit:contain w-[20px] h-[20px]'></img></div>
+                    <div className='bg-white'><img src='./Image/apple.svg' className='object-fit:contain w-[20px] h-[20px]'></img></div>
                     <div className='bg-white'><p onClick={signInWithGoogle}>Continue with Apple</p></div>
                 </div>
                 <div className='bg-white text-center justify-center pt-[25px]'>

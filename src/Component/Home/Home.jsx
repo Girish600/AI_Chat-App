@@ -112,17 +112,17 @@ const handleLogout = () => {
               <div className="gpt-container">
                 <Chat message={message} loading={loading} />
               </div>
-              <div className="input-section rounded- items-center w-full bg-[#2f2f2f] flex justify-center my-5">
-                <MdAddLink className="add-img ml-5 border-none outline-none bg-[#2f2f2f] rounded-[50%] cursor-pointer" size={26} color="white" />
+              <div className="input-section rounded-[40px] outline items-center w-full bg-[#2f2f2f] flex justify-center my-5">
+                <MdAddLink className="add-img border-none outline-none bg-[#2f2f2f] rounded-[50%] cursor-pointer" size={26} color="white" />
                 <input
                   type="text"
                   value={input}
                   placeholder="enter your prompt"
-                  className="flex text-white py-4 px-5 rounded-e-badge w-[600px] bg-[#2f2f2f] text-base outline-none border-none"
+                  className="flex text-white py-4 px-5 rounded-e-badge w-[650px] bg-[#2f2f2f] text-base outline-none border-none"
                   onChange={(e) => setinput(e.target.value)}
                 />
                 <FaArrowUp
-                  className="enter-input border-none outline-none w-[34px] h-[auto] mr-2 text-[#212121] p-2 bg-[#676767] cursor-pointer rounded-[50%]"
+                  className="enter-input border-none outline-none w-[34px] h-[auto] text-[#212121] p-2 bg-[#676767] cursor-pointer rounded-[50%]"
                   onClick={chatOpenAi}
                   color="white"
                 />

@@ -8,34 +8,6 @@ import { GithubAuthProvider } from "firebase/auth/web-extension";
 
 function App() {
 
-  const signInWithGoogle = async () => {
-    try {
-      const result = await signInWithPopup(auth, provider);
-      setUser(result.user);
-    } catch (error) {
-      console.error("Error signing in with Google", error);
-    }
-  };
-
-  const provider = new GithubAuthProvider();
-    const signInWithGithub = async () => {
-        try {
-            signInWithPopup(auth, provider)
-                .then((result) => {
-                    const credential = GithubAuthProvider.credentialFromResult(result);
-                    const token = credential.accessToken;
-                    const user = result.user;
-                }).catch((error) => {
-                    const errorCode = error.code;
-                    const errorMessage = error.message;
-                    const email = error.customData.email;
-                    const credential = GithubAuthProvider.credentialFromError(error);
-                });
-        } catch (error) {
-            console.error("Error signing in with Google", error);
-        }
-    };
-
   return (
     <>
       <div className='App'>
