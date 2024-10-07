@@ -33,7 +33,7 @@ function Login() {
     };
     return (
         <>
-        <div className='login flex flex-col justify-center items-center w-full h-full bg-white pt-[8%]'>
+        <div className='login flex flex-col justify-center items-center w-full h-[100vh] bg-white pt-[8%]'>
             <div className='upper flex flex-col'>
                 <div className='heading text-center items-center flex justify-center'>
                     <img src="/Image/ChatWave.png" alt="Img" class="w-20 p-1"/>
