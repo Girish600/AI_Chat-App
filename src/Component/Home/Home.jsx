@@ -18,6 +18,9 @@ function Home() {
   const [input, setinput] = useState("");
   const [message, setMessage] = useState([]);
   const [user, setUser]= useState(false);
+  // console.log(input);
+  // console.log(message);
+  // console.log(user); 
   // const [data,setData]=useState(0);
   const [loading,setLoading]=useState(false);
   const navigate =useNavigate();
@@ -82,8 +85,8 @@ const handleLogout = () => {
       <main className="bg-[#212121] w-[100%]">
         <nav>
           <div className="p-3 flex justify-between">
-            <div class="flex-1 text-xl ml-5 text-white flex flex-row items-center">
-              <img src="/Image/ChatWave.png" alt="Img" class="w-10 p-1 rounded-[50%]" />
+            <div className="flex-1 text-xl ml-5 text-white flex flex-row items-center">
+              <img src="/Image/ChatWave.png" alt="Img" className="w-10 p-1 rounded-[50%]" />
               <a href="#">ChatWave</a>
             </div>
             {user ? (
@@ -107,8 +110,8 @@ const handleLogout = () => {
           <div className="logo-name text-xl text-white">ChatWave</div>
         </section>
         <section className="Main-Contain w-full flex flex-col items-center justify-center">
-          <div class="flex chat-contain w-[800px] px-5 m-2 bg-[#2f2f2f] rounded-3xl justify-center">
-            <div class="w-full">
+          <div className="flex chat-contain w-[800px] px-5 m-2 bg-[#2f2f2f] rounded-3xl justify-center">
+            <div className="w-full">
               <div className="gpt-container">
                 <Chat message={message} loading={loading} />
               </div>

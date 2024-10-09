@@ -2,10 +2,12 @@ import React from 'react'
 import './Login.css';
 import { auth, provider } from '../FirebaseConfig';
 import { useState } from 'react'
-import { signInWithPopup, GithubAuthProvider } from 'firebase/auth';
+import { signInWithPopup, GithubAuthProvider, signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth';
 
 function Login() {
     const [user, setUser] = useState(null);
+    const [Email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
 
     const signInWithGoogle = async () => {
         try {    
@@ -31,6 +33,24 @@ function Login() {
             console.error("Error signing in with GitHub", error.message);
         }
     };
+    const signInWithEmail = async () => {
+        try{
+            await signInWithEmailAndPassword(auth, Email,password);
+            window.location.assign("/");
+        }
+        catch(error){
+            console.log(error);
+        }
+    };
+    const CreateWithEmail = async () => {
+        try{
+            await createUserWithEmailAndPassword(auth, Email,password);
+            window.location.assign("/");
+        }
+        catch(error){
+            console.log(error);
+        }
+    };
     return (
         <>
         <div className='login flex flex-col justify-center items-center w-full h-[100vh] bg-white pt-[8%]'>
@@ -40,10 +60,13 @@ function Login() {
                     <h1 className='text-3xl text-black bg-white '>Welcome back</h1>
                 </div>
                 <div className='bg-white text-center justify-center pt-[25px]'>
-                    <input type='text' placeholder='Email address or phone number*' className='bg-white border-2 p-1 border-custom-green w-[330px] h-[50px]'></input>
+                    <input type='Email' placeholder='Email address or phone number*' onChange={(ele)=>setEmail(ele.target.value)} className='bg-white border-2 p-1 border-custom-green w-[330px] h-[50px]'></input>
                 </div>
                 <div className='bg-white text-center justify-center pt-[25px]'>
-                    <button className='text-white bg-[#10A37F] w-[330px] h-[50px] rounded-md'>Continue</button>
+                    <input type='Password' placeholder='enter your password' onChange={(ele)=>setPassword(ele.target.value)} className='bg-white border-2 p-1 border-custom-green w-[330px] h-[50px]'></input>
+                </div>
+                <div className='bg-white text-center justify-center pt-[25px]'>
+                    <button onClick={CreateWithEmail} className='text-white bg-[#10A37F] w-[330px] h-[50px] rounded-md'>Continue</button>
                 </div>
                 <div className='bg-white text-center justify-center pt-[25px]'>
                     <p>Don't have an account? <span className='text-[#10A37F] hover:underline cursor-pointer'> Sign Up</span></p>

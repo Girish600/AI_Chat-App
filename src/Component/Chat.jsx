@@ -8,14 +8,14 @@ function Chat({ message, loading}) {
 
   return (
     <>
-    <section class="p-4 m-2 justify-center mychat">
+    <section className="p-4 m-2 justify-center mychat">
       <div className="mychat-section flex w-full flex-col">
 
         {message?.map((ele) => {
           return <> <div className={ele.role=="user"?"user-data self-end":"chatgpt-data self-start"}>{ele?.content && parse(marked(ele.content))}</div> <br/>
           </>
         })}
-        {loading &&  <div class="flex justify-start w-full"><span class="loading loading-dots items-start justify-start loading-lg "></span></div>}
+        {loading &&  <div className="flex justify-start w-full"><span className="loading loading-dots items-start justify-start loading-lg "></span></div>}
        
 
       </div>
