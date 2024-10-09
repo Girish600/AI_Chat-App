@@ -60,13 +60,13 @@ function Login() {
                     <h1 className='text-3xl text-black bg-white '>Welcome back</h1>
                 </div>
                 <div className='bg-white text-center justify-center pt-[25px]'>
-                    <input type='Email' placeholder='Email address or phone number*' onChange={(ele)=>setEmail(ele.target.value)} className='bg-white border-2 p-1 border-custom-green w-[330px] h-[50px]'></input>
+                    <input type='email' placeholder='Email address or phone number*' onChange={(ele)=>setEmail(ele.target.value)} className='bg-white border-2 p-1 border-custom-green w-[330px] h-[50px]'></input>
                 </div>
                 <div className='bg-white text-center justify-center pt-[25px]'>
                     <input type='Password' placeholder='enter your password' onChange={(ele)=>setPassword(ele.target.value)} className='bg-white border-2 p-1 border-custom-green w-[330px] h-[50px]'></input>
                 </div>
                 <div className='bg-white text-center justify-center pt-[25px]'>
-                    <button onClick={CreateWithEmail} className='text-white bg-[#10A37F] w-[330px] h-[50px] rounded-md'>Continue</button>
+                    <button type='submit' onClick={CreateWithEmail} className='text-white bg-[#10A37F] w-[330px] h-[50px] rounded-md'>Continue</button>
                 </div>
                 <div className='bg-white text-center justify-center pt-[25px]'>
                     <p>Don't have an account? <span className='text-[#10A37F] hover:underline cursor-pointer'> Sign Up</span></p>

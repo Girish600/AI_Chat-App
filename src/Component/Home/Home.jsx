@@ -18,6 +18,7 @@ function Home() {
   const [input, setinput] = useState("");
   const [message, setMessage] = useState([]);
   const [user, setUser]= useState(false);
+  const [Logout, setLogout]= useState(false);
   // console.log(input);
   // console.log(message);
   // console.log(user); 
@@ -79,6 +80,11 @@ const handleLogout = () => {
     setLoading(false)
     
   };
+  const handleKeyPress= (e)=>{
+    if(e.key==='Enter'){
+      chatOpenAi();
+    }
+  };
 
   return (
     <>
@@ -90,9 +96,9 @@ const handleLogout = () => {
               <a href="#">ChatWave</a>
             </div>
             {user ? (
-            <div className="sign-btn flex justify-center items-center ml-2 px-4 h-auto w-auto py-1 bg-[#171717] text-sm font-bold text-white rounded-3xl">
-              {user?.photoURL && <img src={user?.photoURL} className="rounded-full w-10 h-10 mr-2" crossOrigin="anonymous" alt="User Profile" loading="lazy"/>}
-              <button onClick={handleLogout}>Logout</button>
+            <div className="sign-btn flex justify-center items-center ml-2 h-auto w-auto bg-[#171717] text-sm font-bold text-white rounded-full">
+              {user?.photoURL && <img src={user?.photoURL} onClick={()=>setLogout(!Logout)} className="rounded-[100%] w-10 h-10 m-1" crossOrigin="anonymous" alt="User Profile" loading="lazy"/>}
+              {Logout && <button onClick={handleLogout} className="mr-2 ml-1">Logout</button>}
             </div>
           ) : (
             <div className="sign-btn flex justify-center items-center ml-2 py-3 px-4 h-auto w-auto py-2 bg-white text-sm font-bold text-black rounded-3xl hover:bg-gray-200">
@@ -122,7 +128,7 @@ const handleLogout = () => {
                   value={input}
                   placeholder="enter your prompt"
                   className="flex text-white py-4 px-5 rounded-e-badge w-[650px] bg-[#2f2f2f] text-base outline-none border-none"
-                  onChange={(e) => setinput(e.target.value)}
+                  onChange={(e) => setinput(e.target.value)} onKeyPress={handleKeyPress}
                 />
                 <FaArrowUp
                   className="enter-input border-none outline-none w-[34px] h-[auto] text-[#212121] p-2 bg-[#676767] cursor-pointer rounded-[50%]"
