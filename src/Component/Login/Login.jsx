@@ -49,6 +49,7 @@ function Login() {
         }
         catch(error){
             console.log(error);
+            signInWithEmail();
         }
     };
     return (

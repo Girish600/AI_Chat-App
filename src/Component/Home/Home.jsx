@@ -7,6 +7,7 @@ import { BrowserRouter, Link, Route, Routes, useNavigate } from "react-router-do
 import Chat from '../Chat'
 import { MdAddLink } from "react-icons/md";
 import { FaArrowUp } from "react-icons/fa";
+import { FaRegUserCircle } from "react-icons/fa";
 import { getAuth, signOut, onAuthStateChanged } from "firebase/auth";
 
 const openai = new OpenAI({
@@ -97,7 +98,7 @@ const handleLogout = () => {
             </div>
             {user ? (
             <div className="sign-btn flex justify-center items-center ml-2 h-auto w-auto bg-[#171717] text-sm font-bold text-white rounded-full">
-              {user?.photoURL && <img src={user?.photoURL} onClick={()=>setLogout(!Logout)} className="rounded-[100%] w-10 h-10 m-1" crossOrigin="anonymous" alt="User Profile" loading="lazy"/>}
+              {user?.photoURL ? <img src={user?.photoURL} onClick={()=>setLogout(!Logout)} className="rounded-[100%] w-10 h-10 m-1" crossOrigin="anonymous" alt="User Profile" loading="lazy"/> : <FaRegUserCircle size={25} className="rounded-[100%] m-1" onClick={()=>setLogout(!Logout)}/>}
               {Logout && <button onClick={handleLogout} className="mr-2 ml-1">Logout</button>}
             </div>
           ) : (
