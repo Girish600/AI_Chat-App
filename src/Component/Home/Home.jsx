@@ -3,51 +3,61 @@ import OpenAI from "openai";
 import Swal from "sweetalert2/dist/sweetalert2.js";
 import "sweetalert2/src/sweetalert2.scss";
 import "./Home.css";
-import { BrowserRouter, Link, Route, Routes, useNavigate } from "react-router-dom";
-import Chat from '../Chat'
+import {
+  BrowserRouter,
+  Link,
+  Route,
+  Routes,
+  useNavigate,
+} from "react-router-dom";
+import Chat from "../Chat";
 import { MdAddLink } from "react-icons/md";
 import { FaArrowUp } from "react-icons/fa";
 import { FaRegUserCircle } from "react-icons/fa";
 import { getAuth, signOut, onAuthStateChanged } from "firebase/auth";
+import { useTheme } from "../ThemeContext/ThemeContext";
+import { Helmet } from "react-helmet";
 
 const openai = new OpenAI({
   apiKey: import.meta.env.VITE_OPENAI_API_KEY,
-  dangerouslyAllowBrowser: true, 
+  dangerouslyAllowBrowser: true,
 });
 
 function Home() {
   const [input, setinput] = useState("");
   const [message, setMessage] = useState([]);
-  const [user, setUser]= useState(false);
-  const [Logout, setLogout]= useState(false);
+  const [user, setUser] = useState(false);
+  const [Logout, setLogout] = useState(false);
   // console.log(input);
   // console.log(message);
-  // console.log(user); 
+  // console.log(user);
   // const [data,setData]=useState(0);
-  const [loading,setLoading]=useState(false);
-  const navigate =useNavigate();
-  const auth= getAuth();
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+  const auth = getAuth();
+  const { theme, ChangeId } = useTheme();
 
   useEffect(() => {
-    
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       if (currentUser) {
-        setUser(currentUser); 
+        setUser(currentUser);
       } else {
-        setUser(null); 
+        setUser(null);
       }
     });
 
     return () => unsubscribe();
-  }, [auth]);
+  }, [auth]);
 
-const handleLogout = () => {
-  signOut(auth).then(() => {
-    navigate('/Login');
-  }).catch((error) => {
-    console.error("Error logging out:", error);
-    });
-  };
+  const handleLogout = () => {
+    signOut(auth)
+      .then(() => {
+        navigate("/Login");
+      })
+      .catch((error) => {
+        console.error("Error logging out:", error);
+      });
+  };
 
   console.log("input", input);
 
@@ -78,58 +88,115 @@ const handleLogout = () => {
     message.push(completion.choices[0].message);
     console.log(completion.choices[0].message);
     setMessage([...message]);
-    setLoading(false)
-    
+    setLoading(false);
   };
-  const handleKeyPress= (e)=>{
-    if(e.key==='Enter'){
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
       chatOpenAi();
     }
   };
 
   return (
     <>
-      <main className="bg-[#212121] w-[100%]">
+    <Helmet>
+      <title>Home Page- ChatWave</title>
+      <meta name="keywords" content="ChatApp, Chat with AI  "/>
+    </Helmet>
+      <main
+        className="bg-[#212121] w-[100%]"
+        style={{ backgroundColor: theme.backgroundColor }}
+      >
         <nav>
           <div className="p-3 flex justify-between">
             <div className="flex-1 text-xl ml-5 text-white flex flex-row items-center">
-              <img src="/Image/ChatWave.png" alt="Img" className="w-10 p-1 rounded-[50%]" />
-              <a href="#">ChatWave</a>
+              <img
+                src="/Image/ChatWave.png"
+                alt="Img"
+                className="w-10 p-1 rounded-[50%]"
+              />
+              <a href="#" style={{ color: theme.textColor }}>
+                ChatWave
+              </a>
+              <div className="theme ml-2">
+                <select name="theme" className="bg-transparent border-transparent" style={{color: theme.textColor }} onChange={(e) => ChangeId(e.target.value)}>
+                  <option value={1} style={{color: theme.textColor }}>Dark</option>
+                  <option value={2} style={{color: theme.textColor }}>Light</option>
+                </select>
+              </div>
             </div>
             {user ? (
-            <div className="sign-btn flex justify-center items-center ml-2 h-auto w-auto bg-[#171717] text-sm font-bold text-white rounded-full">
-              {user?.photoURL ? <img src={user?.photoURL} onClick={()=>setLogout(!Logout)} className="rounded-[100%] w-10 h-10 m-1" crossOrigin="anonymous" alt="User Profile" loading="lazy"/> : <FaRegUserCircle size={25} className="rounded-[100%] m-1" onClick={()=>setLogout(!Logout)}/>}
-              {Logout && <button onClick={handleLogout} className="mr-2 ml-1">Logout</button>}
-            </div>
-          ) : (
-            <div className="sign-btn flex justify-center items-center ml-2 py-3 px-4 h-auto w-auto py-2 bg-white text-sm font-bold text-black rounded-3xl hover:bg-gray-200">
-              <button>
-                <Link to='/Login'>Sign in</Link>
-              </button>
-            </div>
-          )}
+              <div className="sign-btn flex justify-center items-center ml-2 h-auto w-auto bg-[#171717] text-sm font-bold text-white rounded-full">
+                {user?.photoURL ? (
+                  <img
+                    src={user?.photoURL}
+                    onClick={() => setLogout(!Logout)}
+                    className="rounded-[100%] w-10 h-10 m-1"
+                    crossOrigin="anonymous"
+                    alt="User Profile"
+                    loading="lazy"
+                  />
+                ) : (
+                  <FaRegUserCircle
+                    size={25}
+                    className="rounded-[100%] m-1"
+                    onClick={() => setLogout(!Logout)}
+                  />
+                )}
+                {Logout && (
+                  <button onClick={handleLogout} className="mr-2 ml-1">
+                    Logout
+                  </button>
+                )}
+              </div>
+            ) : (
+              <div className="sign-btn flex justify-center items-center ml-2 py-3 px-4 h-auto w-auto py-2 bg-white text-sm font-bold text-black rounded-3xl hover:bg-gray-200">
+                <button>
+                  <Link to="/Login">Sign in</Link>
+                </button>
+              </div>
+            )}
           </div>
         </nav>
         <section className="logo items-center flex flex-row justify-center w-full">
           <div className="logo-img w-20 p-3">
-            <img src="/Image/ChatWave.png" className=" rounded-[50%]"/>
+            <img src="/Image/ChatWave.png" className=" rounded-[50%]" />
           </div>
-          <div className="logo-name text-xl text-white">ChatWave</div>
+          <div
+            className="logo-name text-xl text-white"
+            style={{ color: theme.textColor }}
+          >
+            ChatWave
+          </div>
         </section>
         <section className="Main-Contain w-full flex flex-col items-center justify-center">
-          <div className="flex chat-contain w-[800px] px-5 m-2 bg-[#2f2f2f] rounded-3xl justify-center">
+          <div
+            className="flex chat-contain w-[800px] px-5 m-2 bg-[#2f2f2f] rounded-3xl justify-center"
+            style={{ backgroundColor: theme.backgroundColor }}
+          >
             <div className="w-full">
               <div className="gpt-container">
                 <Chat message={message} loading={loading} />
               </div>
-              <div className="input-section rounded-[40px] outline items-center w-full bg-[#2f2f2f] flex justify-center my-5">
-                <MdAddLink className="add-img border-none outline-none bg-[#2f2f2f] rounded-[50%] cursor-pointer" size={26} color="white" />
+              <div
+                className="input-section rounded-[40px] outline items-center w-full bg-[#2f2f2f] flex justify-center my-5"
+                style={{ backgroundColor: theme.backgroundColor }}
+              >
+                <MdAddLink
+                  className="add-img border-none outline-none bg-[#2f2f2f] rounded-[50%] cursor-pointer"
+                  size={26}
+                  color="white"
+                />
                 <input
                   type="text"
                   value={input}
                   placeholder="enter your prompt"
                   className="flex text-white py-4 px-5 rounded-e-badge w-[650px] bg-[#2f2f2f] text-base outline-none border-none"
-                  onChange={(e) => setinput(e.target.value)} onKeyPress={handleKeyPress}
+                  onChange={(e) => setinput(e.target.value)}
+                  style={{
+                    backgroundColor: theme.backgroundColor,
+                    color: theme.textColor,
+                  }}
+                  onKeyPress={handleKeyPress}
                 />
                 <FaArrowUp
                   className="enter-input border-none outline-none w-[34px] h-[auto] text-[#212121] p-2 bg-[#676767] cursor-pointer rounded-[50%]"
@@ -139,7 +206,9 @@ const handleLogout = () => {
               </div>
             </div>
           </div>
-          <div>ChatWave can make mistakes. Check important info.</div>
+          <div style={{ color: theme.textColor }}>
+            ChatWave can make mistakes. Check important info.
+          </div>
         </section>
       </main>
     </>
