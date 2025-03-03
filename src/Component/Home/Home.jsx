@@ -98,10 +98,10 @@ function Home() {
 
   return (
     <>
-    <Helmet>
-      <title>Home Page- ChatWave</title>
-      <meta name="keywords" content="ChatApp, Chat with AI  "/>
-    </Helmet>
+      <Helmet>
+        <title>Home Page- ChatWave</title>
+        <meta name="keywords" content="ChatApp, Chat with AI  " />
+      </Helmet>
       <main
         className="bg-[#212121] w-[100%]"
         style={{ backgroundColor: theme.backgroundColor }}
@@ -118,9 +118,31 @@ function Home() {
                 ChatWave
               </a>
               <div className="theme ml-2">
-                <select name="theme" className="bg-transparent border-transparent" style={{color: theme.textColor }} onChange={(e) => ChangeId(e.target.value)}>
-                  <option value={1} style={{color: theme.textColor }}>Dark</option>
-                  <option value={2} style={{color: theme.textColor }}>Light</option>
+                <select
+                  name="theme"
+                  className="bg-transparent border-transparent"
+                  style={{
+                    color: theme.textColor,
+                    backgroundColor: "transparent",
+                    border: "none",
+                    appearance: "none", // Ensures a cleaner UI in some browsers
+                    WebkitAppearance: "none", // Fix for Safari
+                    MozAppearance: "none", // Fix for Firefox
+                  }}
+                  onChange={(e) => ChangeId(e.target.value)}
+                >
+                  <option
+                    value={1}
+                    style={{ backgroundColor: "black", color: "white" }}
+                  >
+                    Dark
+                  </option>
+                  <option
+                    value={2}
+                    style={{ backgroundColor: "white", color: "black" }}
+                  >
+                    Light
+                  </option>
                 </select>
               </div>
             </div>
@@ -149,7 +171,7 @@ function Home() {
                 )}
               </div>
             ) : (
-              <div className="sign-btn flex justify-center items-center ml-2 py-3 px-4 h-auto w-auto py-2 bg-white text-sm font-bold text-black rounded-3xl hover:bg-gray-200">
+              <div className="sign-btn flex justify-center items-center ml-2 px-4 h-auto w-auto py-2 bg-white text-sm font-bold text-black rounded-3xl hover:bg-gray-200">
                 <button>
                   <Link to="/Login">Sign in</Link>
                 </button>
